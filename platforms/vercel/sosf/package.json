@@ -7,7 +7,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@beetcb/sor": "^1.0.3"
+    "../../../sor": "^1.0.4"
   },
   "devDependencies": {}
 }
