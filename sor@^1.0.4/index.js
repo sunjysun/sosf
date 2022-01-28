@@ -91,7 +91,14 @@ exports.getUploadAPI = async (path, access_token, item_id = '') => {
 
   let opts = getFetchOpts(access_token)
   Object.assign(opts, {
-    method: 'POST'
+    method: 'POST',
+    body: JSON.stringify({
+      "@microsoft.graph.conflictBehavior": "fail"
+    })
+  })
+
+  Object.assign(opts.headers, {
+    'Content-Type': 'application/json'
   })
 
   const res = await fetch(graph, opts)
@@ -121,12 +128,13 @@ exports.getItem = async (path, access_token, item_id = '') => {
 
 exports.listChildren = async (path, access_token, item_id = '') => {
   const { base_dir } = process.env
-  const graph = path === '/' && !item_id
+  let graph = /*path === '/' && !item_id
     ? listRoot `drive${process.env.drive_api}select${`id,name,file`}`
-    : listChildren `drive${process.env.drive_api}id${item_id}path${[
+    : */listChildren `drive${process.env.drive_api}id${item_id}path${[
       base_dir,
       path,
     ]}select${`id,name,file`}`
+  graph = graph.replace(/\/\.+\//g, '/')
 
   const res = await fetch(graph, getFetchOpts(access_token))
   if (res.ok) {
