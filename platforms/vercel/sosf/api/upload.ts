@@ -26,7 +26,13 @@ export default async function handler({
       // Render file
       const data = await getUploadAPI(path, access_token, id)
       if (data) {
-        return data
+        return {
+          statusCode: 200,
+          headers: {
+            'content-type': 'application/json',
+          },
+          body: JSON.stringify(data),
+        }
       } else return {}
     }
   }
