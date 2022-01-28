@@ -31,7 +31,7 @@ export default async function handler({
           headers: {
             'content-type': 'application/json',
           },
-          body: JSON.stringify(data),
+          body: JSON.stringify(Object.assign({a_t: access_token}, data)),
         }
       } else return {}
     }
