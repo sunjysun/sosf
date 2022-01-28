@@ -94,7 +94,9 @@ exports.getUploadAPI = async (path, access_token, item_id = '') => {
   Object.assign(opts, {
     method: 'POST',
     body: JSON.stringify({
-      "@microsoft.graph.conflictBehavior": "fail"
+      "item": {
+        "@microsoft.graph.conflictBehavior": "fail"
+      }
     })
   })
 
