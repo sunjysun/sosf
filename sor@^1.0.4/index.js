@@ -135,6 +135,7 @@ exports.listChildren = async (path, access_token, item_id = '') => {
       path,
     ]}select${`id,name,file`}`
   graph = graph.replace(/\/\.+\//g, '/')
+  console.log(graph)
 
   const res = await fetch(graph, getFetchOpts(access_token))
   if (res.ok) {
