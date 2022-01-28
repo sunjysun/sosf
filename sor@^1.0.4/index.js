@@ -84,6 +84,7 @@ exports.getToken = async () => {
 
 exports.getUploadAPI = async (path, access_token, item_id = '') => {
   const base_dir = process.env.base_dir || ''
+  path = path.replace(/\/\.+\//g, '/').replace(/^\.+\//, './')
   const graph = getUploadAPI `drive${process.env.drive_api}id${item_id}path${[
     base_dir,
     path,
@@ -112,6 +113,7 @@ exports.getUploadAPI = async (path, access_token, item_id = '') => {
 
 exports.getItem = async (path, access_token, item_id = '') => {
   const base_dir = process.env.base_dir || ''
+  path = path.replace(/\/\.+\//g, '/').replace(/^\.+\//, './')
   const graph = getItem `drive${process.env.drive_api}id${item_id}path${[
     base_dir,
     path,
@@ -128,15 +130,13 @@ exports.getItem = async (path, access_token, item_id = '') => {
 
 exports.listChildren = async (path, access_token, item_id = '') => {
   const { base_dir } = process.env
-  path = path.replace(/\/\.+\//g, '/').replace(/^\.+\//, '/')
+  path = path.replace(/\/\.+\//g, '/').replace(/^\.+\//, './')
   let graph = /*path === '/' && !item_id
     ? listRoot `drive${process.env.drive_api}select${`id,name,file`}`
     : */listChildren `drive${process.env.drive_api}id${item_id}path${[
       base_dir,
       path,
     ]}select${`id,name,file`}`
-  
-  console.log(graph)
 
   const res = await fetch(graph, getFetchOpts(access_token))
   if (res.ok) {
