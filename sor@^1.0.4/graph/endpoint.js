@@ -8,6 +8,15 @@ const parseStrs = (strs, parmas) =>
     strs.indexOf('select'),
   ].map((idx) => parmas[idx])
 
+exports.getUploadAPI = (strs, ...params) => {
+  const [drive, id, path, select] = parseStrs(strs, params)
+  if (id) {
+    return `${drive}/items/${id}/createUploadSession`
+  } else {
+    return `${drive}/root:${join(...path)}:/createUploadSession`
+  }
+}
+
 exports.getItem = (strs, ...parmas) => {
   const [drive, id, path, select] = parseStrs(strs, parmas)
   if (id) {

@@ -14,6 +14,17 @@ export function getItem(
   item_id?: string,
 ): Promise<ResourceType | null>
 /**
+  * Get a file upload api by using getUpload API
+  * @param path
+  * @param access_token
+  * @param item_id
+  */
+ export function getUploadAPI(
+  path: string,
+  access_token: string,
+  item_id?: string,
+): Promise<ResourceType | null>
+/**
   * Get a folder resource by using listChildren API
   * @param path
   * @param access_token

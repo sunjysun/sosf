@@ -15,7 +15,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@beetcb/sor": "file:sor@^1.0.4",
     "inquirer": "^8.0.0",
-    "node-fetch": "^2.6.1"
+    "node-fetch": "^2.6.7",
+    "nodejs-snowflake": "^1.6.2"
   }
 }

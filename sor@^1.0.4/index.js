@@ -2,6 +2,7 @@ const fetch = require('node-fetch')
 const sstore = require('@beetcb/sstore')
 
 const { getItem, listChildren, listRoot } = require('./graph/endpoint')
+const { getUploadAPI } = require('./graph/endpoint')
 
 require('dotenv').config()
 
@@ -79,6 +80,27 @@ exports.getToken = async () => {
   }
   sstore.close()
   return token.access_token
+}
+
+exports.getUploadAPI = async (path, access_token, item_id = '') => {
+  const base_dir = process.env.base_dir || ''
+  const graph = getUploadAPI `drive${process.env.drive_api}id${item_id}path${[
+    base_dir,
+    path,
+  ]}`
+
+  let opts = getFetchOpts(access_token)
+  Object.assign(opts, {
+    method: 'POST'
+  })
+
+  const res = await fetch(graph, opts)
+  if (res.ok) {
+    return await res.json()
+  } else {
+    console.error(res.statusText)
+    return null
+  }
 }
 
 exports.getItem = async (path, access_token, item_id = '') => {
