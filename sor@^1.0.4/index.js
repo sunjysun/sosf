@@ -136,9 +136,9 @@ exports.listChildren = async (path, access_token, item_id = '') => {
   path = path.replace(/\/\.+\//g, '/').replace(/^\.+\//, './')
   console.log('path: ' + path)
   console.log('base_dir: ' + base_dir)
-  let graph = /*path === '/' && !item_id
+  let graph = path === '/' && !item_id
     ? listRoot `drive${process.env.drive_api}select${`id,name,file`}`
-    : */listChildren `drive${process.env.drive_api}id${item_id}path${[
+    : listChildren `drive${process.env.drive_api}id${item_id}path${[
       base_dir,
       path,
     ]}select${`id,name,file`}`
