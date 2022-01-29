@@ -139,7 +139,7 @@ exports.listChildren = async (path, access_token, item_id = '') => {
       base_dir,
       path,
     ]}select${`id,name,file`}`
-
+  console.log(graph)
   const res = await fetch(graph, getFetchOpts(access_token))
   if (res.ok) {
     return await res.json()
