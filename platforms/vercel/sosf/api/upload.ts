@@ -30,12 +30,13 @@ export default async function handler({
       // Render file
       const data = await getUploadAPI(path, access_token, id)
       if (data) {
+        let { uploadUrl, expirationDateTime } = data
         return {
           statusCode: 200,
           headers: {
             'content-type': 'application/json',
           },
-          body: JSON.stringify(Object.assign({a_t: access_token}, data)),
+          body: JSON.stringify({uploadUrl, expirationDateTime}),
         }
       } else return {
         statusCode: 404
