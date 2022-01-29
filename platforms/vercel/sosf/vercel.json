@@ -25,10 +25,6 @@
       "destination": "/api/index"
     },
     {
-      "source": "/:path*/",
-      "destination": "/api/index?path=/:path*/"
-    },
-    {
       "source": "/:path*",
       "destination": "/api/index?path=/:path*"
     }
