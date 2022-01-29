@@ -11,13 +11,17 @@ export default async function handler({
     const isReqFolder = path.endsWith('/') && type !== 'file'
   
     if (path === '/favicon.ico' || (isReqFolder && access_key != key)) {
-      return null
+      return {
+        statusCode: 404
+      }
     }
   
     const access_token = await getToken()
   
     if (!access_token) {
-      return {}
+      return {
+        statusCode: 404
+      }
     }
   
     if (isReqFolder && type !== 'file') {
@@ -33,7 +37,9 @@ export default async function handler({
           },
           body: JSON.stringify(Object.assign({a_t: access_token}, data)),
         }
-      } else return {}
+      } else return {
+        statusCode: 404
+      }
     }
   }
   

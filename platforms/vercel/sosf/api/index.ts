@@ -75,6 +75,8 @@ export default async function handler({
           },
           body: JSON.stringify(itemTable),
         }
+      } else return {
+        statusCode: 404
       }
     }
   } else {
@@ -85,6 +87,8 @@ export default async function handler({
         statusCode: 308,
         headers: { Location: data['@microsoft.graph.downloadUrl'].slice(6) },
       }
-    } else return {}
+    } else return {
+      statusCode: 404
+    }
   }
 }
