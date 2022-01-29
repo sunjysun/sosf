@@ -99,7 +99,7 @@ export default async function handler({
     }
     // Render file
     const data = await getItem(path, access_token, id)
-    if (data) {
+    if (data['@microsoft.graph.downloadUrl']) {
       return {
         statusCode: 308,
         headers: { Location: data['@microsoft.graph.downloadUrl'].slice(6) },
