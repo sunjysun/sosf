@@ -32,10 +32,7 @@ exports.listChildren = (strs, ...parmas) => {
     return `${drive}/items/${id}/children`
   } else {
     return `${drive}/root:${
-      join(...path).slice(
-        0,
-        -1,
-      )
+      join(...path).replace(/(.)\/$/, '$1')
     }:/children?$select=${select}`
   }
 }
