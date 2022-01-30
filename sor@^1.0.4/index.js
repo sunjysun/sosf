@@ -95,7 +95,8 @@ exports.getUploadAPI = async (path, access_token, item_id = '') => {
     method: 'POST',
     body: JSON.stringify({
       "item": {
-        "@microsoft.graph.conflictBehavior": "fail"
+        "@microsoft.graph.conflictBehavior": "fail",
+        "fileSystemInfo": { "@odata.type": "microsoft.graph.fileSystemInfo" },
       }
     })
   })
