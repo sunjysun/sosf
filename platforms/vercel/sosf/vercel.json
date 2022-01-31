@@ -25,6 +25,10 @@
       "destination": "/api/index"
     },
     {
+      "source": "/api",
+      "destination": "/api/index?path=api"
+    },
+    {
       "source": "/:path*",
       "destination": "/api/index?path=/:path*"
     }
